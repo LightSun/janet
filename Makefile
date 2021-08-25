@@ -60,7 +60,13 @@ ifeq ($(UNAME), Darwin)
 	LDCONFIG:=true
 else ifeq ($(UNAME), Linux)
 	CLIBS:=$(CLIBS) -lrt -ldl
+else
+     LDFLAGS=	
 endif
+
+#mingw: windows need ws2_32,wsock32
+CLIBS:=${CLIBS} -lws2_32 -lwsock32
+
 # For other unix likes, add flags here!
 ifeq ($(UNAME), Haiku)
 	LDCONFIG:=true
